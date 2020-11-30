@@ -15,6 +15,8 @@ class AlphabetFragment : BaseFragment<FragmentAlphabetBinding, AlphabetViewModel
     override val viewModel by viewModels<AlphabetViewModel> { getViewModelFactory() }
 
     override fun setupView() {
+        setToolbar(binding.toolbar)
+        displayUpButton(true)
         setupPager()
     }
 

@@ -16,6 +16,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override val viewModel by viewModels<HomeViewModel> { getViewModelFactory() }
 
+    override fun setupView() {
+        setToolbar(binding.toolbar)
+        displayUpButton(false)
+    }
+
     fun goToAlphabet() =
         replaceFragment(AlphabetFragment(), R.id.fragment_container, true, AlphabetFragment.TAG)
 

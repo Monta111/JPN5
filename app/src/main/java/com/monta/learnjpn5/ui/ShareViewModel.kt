@@ -20,8 +20,4 @@ class ShareViewModel @Inject constructor() : BaseViewModel() {
     val checkDungsai = MutableLiveData(false)
 
     val checkTuluan = MutableLiveData(false)
-
-    val point = MutableLiveData(0)
-
-    val pageQuizNumber = MutableLiveData<String>()
 }

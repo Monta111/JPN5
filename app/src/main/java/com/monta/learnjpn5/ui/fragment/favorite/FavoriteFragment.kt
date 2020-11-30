@@ -29,6 +29,8 @@ class FavoriteFragment : TextToSpeechFragment<FragmentFavoriteBinding, FavoriteV
     }
 
     override fun setupView() {
+        setToolbar(binding.toolbar)
+        displayUpButton(true)
         setupRecyclerView()
     }
 

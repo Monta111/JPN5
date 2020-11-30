@@ -12,11 +12,11 @@ abstract class BaseViewModel : ViewModel() {
     var loading = MutableLiveData(true)
     var throwable = MutableLiveData(false)
 
-    val exceptionHandler = CoroutineExceptionHandler { _, _ ->
+    val exceptionHandler = CoroutineExceptionHandler { _, t ->
         throwable.value = true
         loading.value = false
 
-        Log.e("Coroutine Exception", "Exception in ${javaClass.simpleName}")
+        Log.e("Coroutine Exception", "Exception in ${javaClass.simpleName}: ${t.stackTrace}")
 
         viewModelScope.launch {
             delay(1000)

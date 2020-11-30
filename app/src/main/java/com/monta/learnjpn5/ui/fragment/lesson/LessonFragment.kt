@@ -16,6 +16,8 @@ class LessonFragment : BaseFragment<FragmentLessonBinding, LessonViewModel>(),
     override val viewModel by viewModels<LessonViewModel> { getViewModelFactory() }
 
     override fun setupView() {
+        setToolbar(binding.toolbar)
+        displayUpButton(true)
         setupRecyclerView()
     }
 

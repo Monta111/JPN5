@@ -1,6 +1,7 @@
 package com.monta.learnjpn5.base
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -26,7 +27,7 @@ abstract class BaseActivity : AppCompatActivity() {
         fragment: Fragment,
         containerViewId: Int,
         addToBackStack: Boolean,
-        tag: String
+        tag: String,
     ) =
         supportFragmentManager.commit {
             add(containerViewId, fragment)
@@ -49,4 +50,14 @@ abstract class BaseActivity : AppCompatActivity() {
     fun findFragmentByTag(tag: String): Fragment? = supportFragmentManager.findFragmentByTag(tag)
 
     fun getViewModelFactory() = (application as MyApplication).viewModelFactory
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.monta.learnjpn5.ui.fragment.dungsai.DungsaiViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="25dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/textview_question"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="85dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="center"
+                android:text="@{viewModel.question}"
+                android:textColor="@color/textColorSecondary"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textview_question_vn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="center"
+                android:text="@{viewModel.questionVN}"
+                android:textColor="@color/textColorSecondary"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_question" />
+
+            <TextView
+                android:id="@+id/textview_answer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="center"
+                android:text="@{viewModel.awnser}"
+                android:textColor="@color/colorAccent"
+                android:textSize="24sp"
+                android:visibility="@{viewModel.done ? View.VISIBLE : View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_question_vn" />
+
+            <TextView
+                android:id="@+id/textview_choice_right"
+                choice_background="@{viewModel.background1}"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="9dp"
+                android:layout_marginBottom="17dp"
+                android:clickable="@{viewModel.done ? false : true}"
+                android:fontFamily="@font/montserrat_regular"
+                android:gravity="center_vertical"
+                android:onClick="@{() -> viewModel.onSelectAwnser(true)}"
+                android:padding="10dp"
+                android:text="@string/correct"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/textview_choice_wrong"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textview_choice_wrong"
+                choice_background="@{viewModel.background2}"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="9dp"
+                android:layout_marginBottom="17dp"
+                android:clickable="@{viewModel.done ? false : true}"
+                android:fontFamily="@font/montserrat_regular"
+                android:gravity="center_vertical"
+                android:onClick="@{() -> viewModel.onSelectAwnser(false)}"
+                android:padding="10dp"
+                android:text="@string/wrong"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textview_choice_right" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:visibility="@{viewModel.loading ? View.VISIBLE : View.GONE}">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </FrameLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

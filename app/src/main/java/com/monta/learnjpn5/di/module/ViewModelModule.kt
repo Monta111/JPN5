@@ -7,6 +7,7 @@ import com.monta.learnjpn5.di.ViewModelKey
 import com.monta.learnjpn5.ui.ShareViewModel
 import com.monta.learnjpn5.ui.fragment.alphabet.AlphabetViewModel
 import com.monta.learnjpn5.ui.fragment.character.CharacterViewModel
+import com.monta.learnjpn5.ui.fragment.dungsai.DungsaiViewModel
 import com.monta.learnjpn5.ui.fragment.favorite.FavoriteViewModel
 import com.monta.learnjpn5.ui.fragment.grammar.GrammarViewModel
 import com.monta.learnjpn5.ui.fragment.home.HomeViewModel
@@ -16,6 +17,7 @@ import com.monta.learnjpn5.ui.fragment.luachon.LuachonViewModel
 import com.monta.learnjpn5.ui.fragment.mina.MinaViewModel
 import com.monta.learnjpn5.ui.fragment.quiz.QuizViewModel
 import com.monta.learnjpn5.ui.fragment.quizdetail.QuizDetailViewModel
+import com.monta.learnjpn5.ui.fragment.tuluan.TuluanViewModel
 import com.monta.learnjpn5.ui.fragment.word.WordViewModel
 import dagger.Binds
 import dagger.Module
@@ -91,4 +93,14 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(LuachonViewModel::class)
     abstract fun luachonViewModel(viewModel: LuachonViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DungsaiViewModel::class)
+    abstract fun dungsaiViewModel(viewModel: DungsaiViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TuluanViewModel::class)
+    abstract fun tuluanViewModel(viewModel: TuluanViewModel): ViewModel
 }

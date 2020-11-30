@@ -1,5 +1,6 @@
 package com.monta.learnjpn5.ui.fragment.quiz
 
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.monta.learnjpn5.R
 import com.monta.learnjpn5.base.BaseFragment
@@ -13,6 +14,11 @@ class QuizFragment : BaseFragment<FragmentQuizBinding, QuizViewModel>() {
     override val resLayoutId = R.layout.fragment_quiz
 
     override val viewModel by viewModels<QuizViewModel> { getViewModelFactory() }
+
+    override fun setupView() {
+        setToolbar(binding.toolbar)
+        displayUpButton(true)
+    }
 
     fun showNumberOfQuizSelectionDialog() =
         NumberQuizSelectionDialog().show(childFragmentManager, null)
@@ -31,8 +37,18 @@ class QuizFragment : BaseFragment<FragmentQuizBinding, QuizViewModel>() {
         shareViewModel.checkTuluan.value = !shareViewModel.checkTuluan.value!!
     }
 
-    fun goToDetail() =
-        replaceFragment(QuizDetailFragment(), R.id.fragment_container, true, QuizDetailFragment.TAG)
+    fun goToDetail() = with(shareViewModel) {
+        if (checkLuachon.value == false && checkDungsai.value == false && checkTuluan.value == false)
+            Toast.makeText(activity, "Chọn ít nhất 1 loại quiz!", Toast.LENGTH_SHORT).show()
+        else
+            replaceFragment(
+                QuizDetailFragment(),
+                R.id.fragment_container,
+                true,
+                QuizDetailFragment.TAG
+            )
+    }
+
 
     companion object {
         const val TAG = "QuizFragment"

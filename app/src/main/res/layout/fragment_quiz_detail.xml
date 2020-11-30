@@ -11,10 +11,6 @@
             type="com.monta.learnjpn5.ui.fragment.quizdetail.QuizDetailViewModel" />
 
         <variable
-            name="shareVM"
-            type="com.monta.learnjpn5.ui.ShareViewModel" />
-
-        <variable
             name="listener"
             type="com.monta.learnjpn5.ui.fragment.quizdetail.QuizDetailFragment" />
     </data>
@@ -56,26 +52,16 @@
         <TextView
             android:id="@+id/textview_page_number"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="26dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="13dp"
             android:fontFamily="@font/montserrat_regular"
-            android:text="@{}"
+            android:gravity="center"
+            android:text="@{viewModel.pageQuizNumber}"
             android:textColor="@color/textColorSecondary"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <ProgressBar
-            android:id="@+id/progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="@{viewModel.loading ? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <RelativeLayout
             android:id="@+id/layout_gratz"
@@ -84,7 +70,7 @@
             android:background="@drawable/gratz_background"
             android:clickable="true"
             android:focusable="true"
-            android:visibility="gone"
+            android:visibility="@{viewModel.done ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +80,8 @@
                 android:id="@+id/imageview_gratz"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true" />
+                android:layout_centerInParent="true"
+                android:src="@{viewModel.perfect ? @drawable/medal : @drawable/medal_2}" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -102,7 +89,7 @@
                 android:layout_above="@id/textview_score"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/montserrat_regular"
-                android:text="you pass"
+                android:text="@string/pass"
                 android:textAllCaps="true"
                 android:textColor="@color/textColorSecondary"
                 android:textSize="21sp" />
@@ -114,10 +101,12 @@
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:fontFamily="@font/montserrat_black"
+                android:text="@{viewModel.pointString}"
                 android:textColor="@color/textColorSecondary"
                 android:textSize="42sp" />
 
             <TextView
+                android:onClick="@{() -> listener.onBackPressed()}"
                 android:id="@+id/textview_back"
                 android:layout_width="166dp"
                 android:layout_height="42dp"
@@ -127,7 +116,7 @@
                 android:background="@drawable/back_button_background"
                 android:fontFamily="@font/montserrat_bold"
                 android:gravity="center"
-                android:text="Quay lại"
+                android:text="@string/back"
                 android:textColor="@color/colorWhite"
                 android:textSize="14sp" />
         </RelativeLayout>
@@ -135,11 +124,13 @@
         <TextView
             android:id="@+id/textview_next"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginEnd="21dp"
             android:drawablePadding="5dp"
             android:fontFamily="@font/montserrat_regular"
-            android:text="Tiếp theo"
+            android:gravity="center"
+            android:onClick="@{() -> viewModel.onNextQuiz()}"
+            android:text="@string/next"
             android:textColor="@color/colorAccent"
             android:textSize="19sp"
             app:drawableEndCompat="@drawable/ic_arrow"

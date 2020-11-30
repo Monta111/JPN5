@@ -21,3 +21,29 @@ fun isSelectedTopic(view: TextView, selected: Boolean) {
         view.setTextColor(ContextCompat.getColor(view.context, R.color.textColorSecondary))
     }
 }
+
+@BindingAdapter("choice_background")
+fun setChoiceBackground(view: TextView, status: Int) {
+    when (status) {
+        1 -> {
+            view.setTextColor(ContextCompat.getColor(view.context, R.color.colorWhite))
+            view.setBackgroundResource(R.drawable.choice_quiz_background_correct)
+            view.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                null,
+                null,
+                ContextCompat.getDrawable(view.context, R.drawable.ic_check),
+                null
+            )
+        }
+        0 -> {
+            view.setBackgroundResource(R.drawable.choice_quiz_background_wrong)
+            view.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                null,
+                null,
+                ContextCompat.getDrawable(view.context, R.drawable.ic_close),
+                null
+            )
+        }
+        else -> view.setBackgroundResource(R.drawable.choice_quiz_background)
+    }
+}

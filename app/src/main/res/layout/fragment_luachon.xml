@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.monta.learnjpn5.ui.fragment.luachon.LuachonViewModel" />
@@ -35,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="65dp"
                 android:fontFamily="@font/montserrat_bold"
+                android:text="@{viewModel.question}"
                 android:textColor="@color/textColorSecondary"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -43,30 +46,36 @@
 
             <TextView
                 android:id="@+id/textview_choice1"
+                choice_background="@{viewModel.background1}"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="83dp"
-                android:background="@drawable/choice_quiz_background"
+                android:clickable="@{viewModel.done ? false : true}"
                 android:fontFamily="@font/montserrat_regular"
                 android:gravity="center_vertical"
+                android:onClick="@{() -> viewModel.onSelectAwnser(0)}"
                 android:paddingStart="13dp"
                 android:paddingEnd="18dp"
+                android:text="@{viewModel.choice1}"
                 android:textColor="@color/colorChoice"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textview_question" />
 
             <TextView
                 android:id="@+id/textview_choice2"
+                choice_background="@{viewModel.background2}"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/choice_quiz_background"
+                android:clickable="@{viewModel.done ? false : true}"
                 android:fontFamily="@font/montserrat_regular"
                 android:gravity="center_vertical"
+                android:onClick="@{() -> viewModel.onSelectAwnser(1)}"
                 android:paddingStart="13dp"
                 android:paddingEnd="18dp"
+                android:text="@{viewModel.choice2}"
                 android:textColor="@color/colorChoice"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -75,14 +84,17 @@
 
             <TextView
                 android:id="@+id/textview_choice3"
+                choice_background="@{viewModel.background3}"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/choice_quiz_background"
+                android:clickable="@{viewModel.done ? false : true}"
                 android:fontFamily="@font/montserrat_regular"
                 android:gravity="center_vertical"
+                android:onClick="@{() -> viewModel.onSelectAwnser(2)}"
                 android:paddingStart="13dp"
                 android:paddingEnd="18dp"
+                android:text="@{viewModel.choice3}"
                 android:textColor="@color/colorChoice"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -91,15 +103,18 @@
 
             <TextView
                 android:id="@+id/textview_choice4"
+                choice_background="@{viewModel.background4}"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="14dp"
-                android:background="@drawable/choice_quiz_background"
+                android:clickable="@{viewModel.done ? false : true}"
                 android:fontFamily="@font/montserrat_regular"
                 android:gravity="center_vertical"
+                android:onClick="@{() -> viewModel.onSelectAwnser(3)}"
                 android:paddingStart="13dp"
                 android:paddingEnd="18dp"
+                android:text="@{viewModel.choice4}"
                 android:textColor="@color/colorChoice"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -107,6 +122,22 @@
                 app:layout_constraintTop_toBottomOf="@id/textview_choice3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:visibility="@{viewModel.loading ? View.VISIBLE : View.GONE}">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </FrameLayout>
 
     </androidx.cardview.widget.CardView>
 </layout>

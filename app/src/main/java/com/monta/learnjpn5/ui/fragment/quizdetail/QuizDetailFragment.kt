@@ -6,6 +6,9 @@ import androidx.fragment.app.viewModels
 import com.monta.learnjpn5.R
 import com.monta.learnjpn5.base.BaseFragment
 import com.monta.learnjpn5.databinding.FragmentQuizDetailBinding
+import com.monta.learnjpn5.ui.fragment.dungsai.DungsaiFragment
+import com.monta.learnjpn5.ui.fragment.luachon.LuachonFragment
+import com.monta.learnjpn5.ui.fragment.tuluan.TuluanFragment
 
 class QuizDetailFragment : BaseFragment<FragmentQuizDetailBinding, QuizDetailViewModel>() {
 
@@ -13,21 +16,46 @@ class QuizDetailFragment : BaseFragment<FragmentQuizDetailBinding, QuizDetailVie
 
     override val viewModel by viewModels<QuizDetailViewModel> { getViewModelFactory() }
 
+    override fun setupView() {
+        setToolbar(binding.toolbar)
+        displayUpButton(true)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        shareViewModel.selectedTopic.observe(viewLifecycleOwner) {
-            if (it == 0) {
-                viewModel.onSelectVocabularyTopic()
-            } else
-                viewModel.onSelectKanjiTopic()
+        with(shareViewModel) {
+            viewModel.onCreateOrderQuiz(
+                numberOfQuiz.value!!,
+                checkLuachon.value!!,
+                checkDungsai.value!!,
+                checkTuluan.value!!
+            )
+            viewModel.numberOfQuiz = numberOfQuiz.value!!
         }
 
-        shareViewModel.let {
-            viewModel.onCreateOrderQuiz(
-                it.numberOfQuiz.value!!,
-                it.checkLuachon.value!!,
-                it.checkDungsai.value!!,
-                it.checkTuluan.value!!
-            )
+        with(viewModel) {
+            loading.observe(viewLifecycleOwner) {
+                if (!it)
+                    currentQuiz.observe(viewLifecycleOwner) { current ->
+                        pageQuizNumber.value = "${current + 1} / $numberOfQuiz"
+                        when (orders[current]) {
+                            1 -> replaceChildFragment(
+                                LuachonFragment(),
+                                R.id.child_fragment_container,
+                                LuachonFragment.TAG
+                            )
+                            2 -> replaceChildFragment(
+                                DungsaiFragment(),
+                                R.id.child_fragment_container,
+                                LuachonFragment.TAG
+                            )
+                            4 -> replaceChildFragment(
+                                TuluanFragment(),
+                                R.id.child_fragment_container,
+                                TuluanFragment.TAG
+                            )
+                        }
+                    }
+            }
         }
     }
 

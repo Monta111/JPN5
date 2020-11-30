@@ -3,79 +3,88 @@ package com.monta.learnjpn5.ui.fragment.quizdetail
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.monta.learnjpn5.base.BaseViewModel
-import com.monta.learnjpn5.data.KanjiRepository
-import com.monta.learnjpn5.data.WordRepository
-import com.monta.learnjpn5.model.Kanji
-import com.monta.learnjpn5.model.Word
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class QuizDetailViewModel @Inject constructor(
-    private val wordRepository: WordRepository,
-    private val kanjiRepository: KanjiRepository
-) : BaseViewModel() {
+class QuizDetailViewModel @Inject constructor() : BaseViewModel() {
+    val orders = mutableListOf<Int>()
 
-    val words = MutableLiveData<MutableList<Word>>()
+    val currentQuiz = MutableLiveData(0)
 
-    val kanjis = MutableLiveData<MutableList<Kanji>>()
+    val pageQuizNumber = MutableLiveData<String>()
 
-    val orders = MutableLiveData<MutableList<Int>>(mutableListOf())
+    val done = MutableLiveData(false)
 
-    fun onSelectVocabularyTopic() = viewModelScope.launch(exceptionHandler) {
-        words.value = wordRepository.getRandomWords(50).toMutableList()
-        loading.value = false
-    }
+    val perfect = MutableLiveData<Boolean>()
 
-    fun onSelectKanjiTopic() = viewModelScope.launch(exceptionHandler) {
-        kanjis.value = kanjiRepository.getRandomKanjis(50).toMutableList()
-    }
+    val pointString = MutableLiveData<String>()
+
+    var point = 0
+
+    var numberOfQuiz = 0
 
     fun onCreateOrderQuiz(
         numberOfQuiz: Int,
         checkLuachon: Boolean,
         checkDungsai: Boolean,
         checkTuluan: Boolean
-    ) = viewModelScope.launch {
-        withContext(Dispatchers.Main) {
-            val a = if (checkLuachon) 1 else 0
-            val b = if (checkDungsai) 2 else 0
-            val c = if (checkTuluan) 4 else 0
+    ) = viewModelScope.launch(exceptionHandler) {
+        createOrderQuiz(numberOfQuiz, checkLuachon, checkDungsai, checkTuluan)
+        loading.value = false
+    }
 
-            val div2 = numberOfQuiz / 2
-            val div3 = numberOfQuiz / 3
+    fun onNextQuiz() {
+        if (currentQuiz.value == numberOfQuiz - 1) {
+            done.value = true
+            perfect.value = point == numberOfQuiz
+            pointString.value = "$point / $numberOfQuiz"
+        } else
+            currentQuiz.value = currentQuiz.value?.plus(1)
+    }
 
-            orders.value?.apply {
-                when (a + b + c) {
-                    1 -> repeat(numberOfQuiz) { add(1) }
-                    2 -> repeat(numberOfQuiz) { add(2) }
-                    4 -> repeat(numberOfQuiz) { add(4) }
-                    3 -> {
-                        repeat(div2) { add(1) }
-                        repeat(numberOfQuiz - div2) { add(2) }
+    private suspend fun createOrderQuiz(
+        numberOfQuiz: Int,
+        checkLuachon: Boolean,
+        checkDungsai: Boolean,
+        checkTuluan: Boolean
+    ) = withContext(Dispatchers.Default) {
+        val a = if (checkLuachon) 1 else 0
+        val b = if (checkDungsai) 2 else 0
+        val c = if (checkTuluan) 4 else 0
+
+        val div2 = numberOfQuiz / 2
+        val div3 = numberOfQuiz / 3
+
+        orders.apply {
+            when (a + b + c) {
+                1 -> repeat(numberOfQuiz) { add(1) }
+                2 -> repeat(numberOfQuiz) { add(2) }
+                4 -> repeat(numberOfQuiz) { add(4) }
+                3 -> {
+                    repeat(div2) { add(1) }
+                    repeat(numberOfQuiz - div2) { add(2) }
+                }
+                5 -> {
+                    repeat(div2) { add(1) }
+                    repeat(numberOfQuiz - div2) { add(4) }
+                }
+                6 -> {
+                    repeat(div2) { add(2) }
+                    repeat(numberOfQuiz - div2) { add(4) }
+                }
+                7 -> {
+                    repeat(div3) {
+                        add(1)
+                        add(2)
                     }
-                    5 -> {
-                        repeat(div2) { add(1) }
-                        repeat(numberOfQuiz - div2) { add(4) }
-                    }
-                    6 -> {
-                        repeat(div2) { add(2) }
-                        repeat(numberOfQuiz - div2) { add(4) }
-                    }
-                    7 -> {
-                        repeat(div3) {
-                            add(1)
-                            add(2)
-                        }
-                        repeat(numberOfQuiz - 2 * div3) {
-                            add(4)
-                        }
+                    repeat(numberOfQuiz - 2 * div3) {
+                        add(4)
                     }
                 }
             }
-
-            orders.value?.shuffle()
+            shuffle()
         }
     }
 }

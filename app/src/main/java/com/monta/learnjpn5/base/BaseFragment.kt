@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -33,15 +34,6 @@ abstract class BaseFragment<B : ViewDataBinding, T : ViewModel> : Fragment() {
     }
 
     open fun setupView() {}
-
-//    open fun setupTransition() {
-//        enterTransition = MaterialFadeThrough().apply {
-//            duration = 400
-//        }
-//        exitTransition = MaterialFadeThrough().apply {
-//            duration = 400
-//        }
-//    }
 
     private fun bind() {
         binding.setVariable(BR.shareVM, shareViewModel)
@@ -80,9 +72,19 @@ abstract class BaseFragment<B : ViewDataBinding, T : ViewModel> : Fragment() {
     ) =
         childFragmentManager.beginTransaction().replace(containerViewId, fragment, tag).commit()
 
-    fun findFragmentByTag(tag: String) = (activity as BaseActivity).findFragmentByTag(tag)
+    fun findFragmentByTag(tag: String) = (activity as? BaseActivity)?.findFragmentByTag(tag)
 
-    fun back() = activity?.onBackPressed()
+    fun setToolbar(toolbar: Toolbar) {
+        (activity as? BaseActivity)?.setSupportActionBar(toolbar)
+        (activity as? BaseActivity)?.supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
+
+    fun displayUpButton(enabled: Boolean) = if (enabled)
+        (activity as? BaseActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    else
+        (activity as? BaseActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
+    fun onBackPressed() = activity?.onBackPressed()
 
     fun getViewModelFactory() = (activity as BaseActivity).getViewModelFactory()
 }

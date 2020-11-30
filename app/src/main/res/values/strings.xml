@@ -15,4 +15,15 @@
     <string name="done">Done</string>
     <string name="done2">"Hoàn thành"</string>
     <string name="kanji2">Kanji</string>
+    <string name="correct">Đúng</string>
+    <string name="wrong">Sai</string>
+    <string name="quiz_type">Loại câu hỏi</string>
+    <string name="selection_quiz">Câu hỏi lựa chọn</string>
+    <string name="true_false_quiz">Câu hỏi đúng sai</string>
+    <string name="write_quiz">Câu hỏi tự luận</string>
+    <string name="number_of_quiz">Số câu hỏi</string>
+    <string name="start">Bắt đầu</string>
+    <string name="pass">you pass</string>
+    <string name="back">Quay lại</string>
+    <string name="next">Tiếp theo</string>
 </resources>

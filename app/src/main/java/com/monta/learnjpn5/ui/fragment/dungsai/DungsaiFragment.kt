@@ -1,18 +1,18 @@
-package com.monta.learnjpn5.ui.fragment.luachon
+package com.monta.learnjpn5.ui.fragment.dungsai
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.monta.learnjpn5.R
 import com.monta.learnjpn5.base.BaseFragment
-import com.monta.learnjpn5.databinding.FragmentLuachonBinding
+import com.monta.learnjpn5.databinding.FragmentDungsaiBinding
 import com.monta.learnjpn5.ui.fragment.quizdetail.QuizDetailViewModel
 
-class LuachonFragment : BaseFragment<FragmentLuachonBinding, LuachonViewModel>() {
+class DungsaiFragment : BaseFragment<FragmentDungsaiBinding, DungsaiViewModel>() {
 
-    override val resLayoutId = R.layout.fragment_luachon
+    override val resLayoutId = R.layout.fragment_dungsai
 
-    override val viewModel by viewModels<LuachonViewModel> { getViewModelFactory() }
+    override val viewModel by viewModels<DungsaiViewModel> { getViewModelFactory() }
 
     private val parentViewModel by viewModels<QuizDetailViewModel>({ requireParentFragment() })
 
@@ -27,6 +27,6 @@ class LuachonFragment : BaseFragment<FragmentLuachonBinding, LuachonViewModel>()
     }
 
     companion object {
-        const val TAG = "LuachonFragment"
+        const val TAG = "DungsaiFragment"
     }
 }

@@ -23,7 +23,14 @@ class DefaultKanjiRepository @Inject constructor(
     }
 
 
-    override suspend fun getRandomKanjis(limit: Int): List<Kanji> {
-        TODO("Not yet implemented")
+    override suspend fun getRandomKanjis(limit: Int): List<Kanji> = withContext(Dispatchers.IO) {
+        val localData = kanjiLocalDataSource.getRandomKanjis(limit)
+        if (localData.isEmpty()) {
+            val remoteData = kanjiRemoteDataSource.getKanjis()
+            kanjiLocalDataSource.insertKanjis(remoteData)
+            return@withContext remoteData.subList(0, limit)
+        }
+
+        return@withContext localData
     }
 }

@@ -29,6 +29,8 @@ class KanjiFragment : TextToSpeechFragment<FragmentKanjiBinding, KanjiViewModel>
     }
 
     override fun setupView() {
+        setToolbar(binding.toolbar)
+        displayUpButton(true)
         setupPager()
     }
 
