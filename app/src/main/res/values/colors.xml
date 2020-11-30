@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FBFBFB</color>
+    <color name="colorPrimaryDark">#969696</color>
+    <color name="colorAccent">#4AA4FF</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="textColorPrimary">#2E2E2E</color>
+    <color name="textColorSecondary">#363636</color>
+    <color name="textColor3">#646464</color>
+    <color name="romanjiColor">#646464</color>
+    <color name="colorLightBlue">#b3e5fc</color>
+    <color name="colorBackgroundNumber">#EFEFF4F0</color>
+    <color name="colorNumber">#333333</color>
+    <color name="colorChoice">#232323</color>
+</resources>

@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">LearnJPN5</string>
+    <string name="alphabet">Bảng chữ cái</string>
+    <string name="mina">25 bài mina N5</string>
+    <string name="quiz">Quiz</string>
+    <string name="vocabulary">từ vựng\nyêu thích</string>
+    <string name="vocabulary2">Từ vựng yêu thích</string>
+    <string name="n5">Khóa học N5 cơ bản</string>
+    <string name="kanji">Khóa học kanji cơ bản</string>
+    <string name="kanji_basic">Kanji cơ bản</string>
+    <string name="lesson">Lesson</string>
+    <string name="empty_vocabulary">Hiện đang không có dữ liệu từ vựng yêu thích. Hãy tới bài học và chọn cho mình từ vựng yêu thích nhé!</string>
+    <string name="topic">Chủ đề</string>
+    <string name="vocabulary3">Từ vựng</string>
+    <string name="done">Done</string>
+    <string name="done2">"Hoàn thành"</string>
+    <string name="kanji2">Kanji</string>
+</resources>

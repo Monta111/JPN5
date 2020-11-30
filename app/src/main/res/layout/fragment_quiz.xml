@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="listener"
+            type="com.monta.learnjpn5.ui.fragment.quiz.QuizFragment" />
+
+        <variable
+            name="shareVM"
+            type="com.monta.learnjpn5.ui.ShareViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_quiz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/quiz"
+            android:textColor="@color/textColorSecondary"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <ImageView
+            android:id="@+id/iv_quiz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/img_quiz"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_quiz" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_topic"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="21dp"
+            android:onClick="@{() -> listener.showTopicSelectionDialog()}"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_quiz">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="21dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/topic"
+                    android:textColor="@color/textColor3"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/textview_topic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="21dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@{shareVM.selectedTopicString}"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_quiz_type"
+            android:layout_width="match_parent"
+            android:layout_height="164dp"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="21dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardview_topic">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_quiz_type"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_quiz_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="21dp"
+                    android:layout_marginTop="17dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Loại câu hỏi"
+                    android:textColor="@color/textColor3"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_luachon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="29dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Câu hỏi lựa chọn"
+                    android:textColor="@color/textColor3"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@id/tv_dungsai"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_quiz_type" />
+
+                <TextView
+                    android:id="@+id/tv_dungsai"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="29dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Câu hỏi đúng sai"
+                    android:textColor="@color/textColor3"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_tuluan"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_luachon" />
+
+                <TextView
+                    android:id="@+id/tv_tuluan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="29dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Câu hỏi tự luận"
+                    android:textColor="@color/textColor3"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/layout_quiz_type"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_dungsai" />
+
+                <ImageView
+                    android:id="@+id/box_luachon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="17dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:onClick="@{() -> listener.onSelectBoxLuachon()}"
+                    android:src="@{shareVM.checkLuachon ? @drawable/box_check : @drawable/box}"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_luachon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_luachon" />
+
+                <ImageView
+                    android:id="@+id/box_dungsai"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="17dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:onClick="@{() -> listener.onSelectBoxDungsai()}"
+                    android:src="@{shareVM.checkDungsai ? @drawable/box_check : @drawable/box}"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_dungsai"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_dungsai" />
+
+                <ImageView
+                    android:id="@+id/box_tuluan"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="17dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:onClick="@{() -> listener.onSelectBoxTuluan()}"
+                    android:src="@{shareVM.checkTuluan ? @drawable/box_check : @drawable/box}"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_tuluan"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_tuluan" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_number_of_quiz"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="21dp"
+            android:onClick="@{() -> listener.showNumberOfQuizSelectionDialog()}"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cv_quiz_type">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="21dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Số câu hỏi"
+                    android:textColor="@color/textColor3"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/textview_number_of_quiz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="21dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@{shareVM.numberOfQuiz.toString()}"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/textview_start"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="21dp"
+            android:background="@drawable/start_textview_background"
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:onClick="@{() -> listener.goToDetail()}"
+            android:text="Bắt đầu"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/cardview_number_of_quiz" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

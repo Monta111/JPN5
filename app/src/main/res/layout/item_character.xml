@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.monta.learnjpn5.model.Character" />
+
+        <variable
+            name="listener"
+            type="com.monta.learnjpn5.adapter.CharacterAdapter.CharacterHolder.OnCharacterClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_square"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@{item.selected ? @drawable/character_background_selected : @drawable/character_background_unselected}"
+        android:onClick="@{() -> listener.onCharacterClick(item.character)}">
+
+        <TextView
+            android:id="@+id/textview_character"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:text="@{item.character}"
+            android:textAllCaps="true"
+            android:textColor="@color/textColorSecondary"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

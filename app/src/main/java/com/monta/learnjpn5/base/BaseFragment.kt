@@ -1,0 +1,88 @@
+package com.monta.learnjpn5.base
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
+import com.monta.learnjpn5.BR
+import com.monta.learnjpn5.ui.ShareViewModel
+
+abstract class BaseFragment<B : ViewDataBinding, T : ViewModel> : Fragment() {
+
+    lateinit var binding: B
+
+    abstract val resLayoutId: Int
+    abstract val viewModel: T
+
+    val shareViewModel by activityViewModels<ShareViewModel> { getViewModelFactory() }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = DataBindingUtil.inflate(inflater, resLayoutId, container, false)
+        bind()
+        setupView()
+        return binding.root
+    }
+
+    open fun setupView() {}
+
+//    open fun setupTransition() {
+//        enterTransition = MaterialFadeThrough().apply {
+//            duration = 400
+//        }
+//        exitTransition = MaterialFadeThrough().apply {
+//            duration = 400
+//        }
+//    }
+
+    private fun bind() {
+        binding.setVariable(BR.shareVM, shareViewModel)
+        binding.setVariable(BR.viewModel, viewModel)
+        binding.setVariable(BR.listener, this)
+        binding.lifecycleOwner = this
+    }
+
+    fun addFragment(
+        fragment: Fragment,
+        containerViewId: Int,
+        addToBackStack: Boolean,
+        tag: String
+    ) =
+        (activity as BaseActivity).addFragment(fragment, containerViewId, addToBackStack, tag)
+
+    fun replaceFragment(
+        fragment: Fragment,
+        containerViewId: Int,
+        addToBackStack: Boolean,
+        tag: String
+    ) =
+        (activity as BaseActivity).replaceFragment(fragment, containerViewId, addToBackStack, tag)
+
+    fun addChildFragment(
+        fragment: Fragment,
+        containerViewId: Int,
+        tag: String
+    ) =
+        childFragmentManager.beginTransaction().add(containerViewId, fragment, tag).commit()
+
+    fun replaceChildFragment(
+        fragment: Fragment,
+        containerViewId: Int,
+        tag: String
+    ) =
+        childFragmentManager.beginTransaction().replace(containerViewId, fragment, tag).commit()
+
+    fun findFragmentByTag(tag: String) = (activity as BaseActivity).findFragmentByTag(tag)
+
+    fun back() = activity?.onBackPressed()
+
+    fun getViewModelFactory() = (activity as BaseActivity).getViewModelFactory()
+}

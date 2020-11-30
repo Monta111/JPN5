@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.monta.learnjpn5.ui.fragment.home.HomeViewModel" />
+
+        <variable
+            name="listener"
+            type="com.monta.learnjpn5.ui.fragment.home.HomeFragment" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_short_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <TextView
+                android:id="@+id/n5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="@string/n5"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview_alphabet"
+                style="@style/CategoryCardView"
+                android:layout_marginStart="21dp"
+                android:layout_marginEnd="10dp"
+                android:onClick="@{() -> listener.goToAlphabet()}"
+                app:layout_constraintEnd_toStartOf="@id/cardview_lesson"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/n5">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        style="@style/CategoryImageView"
+                        android:src="@drawable/img_alphabet"
+                        app:layout_constraintBottom_toTopOf="@id/text_alphabet"
+                        app:layout_constraintDimensionRatio="4:3"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/text_alphabet"
+                        style="@style/CategoryTextView"
+                        android:text="@string/alphabet"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview_lesson"
+                style="@style/CategoryCardView"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="21dp"
+                android:onClick="@{() -> listener.goToLesson()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cardview_alphabet"
+                app:layout_constraintTop_toBottomOf="@id/n5">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        style="@style/CategoryImageView"
+                        android:src="@drawable/img_lesson"
+                        app:layout_constraintBottom_toTopOf="@id/text_lesson"
+                        app:layout_constraintDimensionRatio="4:3"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_lesson"
+                        style="@style/CategoryTextView"
+                        android:text="@string/mina"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview_quiz"
+                style="@style/CategoryCardView"
+                android:layout_marginStart="21dp"
+                android:onClick="@{() -> listener.goToQuiz()}"
+                app:layout_constraintEnd_toStartOf="@id/cardview_favorite"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardview_alphabet">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        style="@style/CategoryImageView"
+                        android:src="@drawable/img_quiz"
+                        app:layout_constraintBottom_toTopOf="@id/text_quiz"
+                        app:layout_constraintDimensionRatio="4:3"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/text_quiz"
+                        style="@style/CategoryTextView"
+                        android:text="@string/quiz"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview_favorite"
+                style="@style/CategoryCardView"
+                android:layout_marginEnd="21dp"
+                android:onClick="@{() -> listener.goToFavorite()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cardview_quiz"
+                app:layout_constraintTop_toBottomOf="@id/cardview_lesson">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        style="@style/CategoryImageView"
+                        android:src="@drawable/ic_vocabulary"
+                        app:layout_constraintBottom_toTopOf="@id/text_favorite"
+                        app:layout_constraintDimensionRatio="4:3"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/text_favorite"
+                        style="@style/CategoryTextView"
+                        android:text="@string/vocabulary"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/kanji"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="59dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="@string/kanji"
+                android:textColor="@color/textColorSecondary"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardview_quiz" />
+
+            <ImageView
+                android:id="@+id/imageview_kanji"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="30dp"
+                android:onClick="@{()->listener.goToKanji()}"
+                android:src="@drawable/img_kanji"
+                app:layout_constraintDimensionRatio="504:254"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/kanji" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="27dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="@string/kanji_basic"
+                android:textColor="@color/textColorSecondary"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@id/kanji"
+                app:layout_constraintTop_toTopOf="@id/imageview_kanji" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

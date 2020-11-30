@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.monta.learnjpn5.model.Kanji" />
+
+        <variable
+            name="listener"
+            type="com.monta.learnjpn5.adapter.KanjiAdapter.KanjiHolder.OnKanjiClickListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp">
+
+        <com.wajahatkarim3.easyflipview.EasyFlipView
+            android:id="@+id/flipview_kanji"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:autoFlipBack="false"
+            app:flipDuration="500"
+            app:flipEnabled="true"
+            app:flipFrom="right"
+            app:flipOnTouch="false"
+            app:flipType="horizontal">
+
+            <include
+                android:id="@+id/item_kanji_back"
+                layout="@layout/item_kanji_back"
+                app:item="@{item}"
+                app:listener="@{listener}" />
+
+            <include
+                android:id="@+id/item_kanji_front"
+                layout="@layout/item_kanji_front"
+                app:item="@{item}"
+                app:listener="@{listener}" />
+
+        </com.wajahatkarim3.easyflipview.EasyFlipView>
+
+    </androidx.cardview.widget.CardView>
+</layout>

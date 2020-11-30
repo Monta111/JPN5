@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="java.lang.String" />
+
+        <variable
+            name="listener"
+            type="com.monta.learnjpn5.adapter.LessonAdapter.LessonHolder.OnLessonClickListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="7dp"
+        android:onClick="@{()->listener.onLessonClick(item)}"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp">
+
+        <TextView
+            android:id="@+id/textview_lesson_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="23dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center_vertical"
+            android:text="@{item}"
+            android:textColor="@color/textColorSecondary"
+            android:textSize="16sp" />
+
+    </androidx.cardview.widget.CardView>
+</layout>
