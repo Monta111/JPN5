@@ -16,10 +16,8 @@ class MinaFragment : BaseFragment<FragmentMinaBinding, MinaViewModel>() {
     override val viewModel by viewModels<MinaViewModel> { getViewModelFactory() }
 
     override fun setupView() {
-        with(binding.toolbar) {
-            setToolbar(this)
-            displayUpButton(true)
-        }
+        setToolbar(binding.toolbar)
+        displayUpButton(true)
         setupViewPager()
     }
 

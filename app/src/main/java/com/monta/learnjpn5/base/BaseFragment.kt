@@ -79,10 +79,8 @@ abstract class BaseFragment<B : ViewDataBinding, T : ViewModel> : Fragment() {
         (activity as? BaseActivity)?.supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
-    fun displayUpButton(enabled: Boolean) = if (enabled)
-        (activity as? BaseActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    else
-        (activity as? BaseActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+    fun displayUpButton(enabled: Boolean) =
+        (activity as? BaseActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(enabled)
 
     fun onBackPressed() = activity?.onBackPressed()
 
