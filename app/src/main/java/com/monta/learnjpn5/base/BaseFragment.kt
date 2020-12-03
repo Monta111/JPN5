@@ -9,8 +9,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModel
 import com.monta.learnjpn5.BR
+import com.monta.learnjpn5.R
 import com.monta.learnjpn5.ui.ShareViewModel
 
 abstract class BaseFragment<B : ViewDataBinding, T : ViewModel> : Fragment() {
@@ -63,14 +65,30 @@ abstract class BaseFragment<B : ViewDataBinding, T : ViewModel> : Fragment() {
         containerViewId: Int,
         tag: String
     ) =
-        childFragmentManager.beginTransaction().add(containerViewId, fragment, tag).commit()
+        childFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
+            add(containerViewId, fragment, tag)
+        }
 
     fun replaceChildFragment(
         fragment: Fragment,
         containerViewId: Int,
         tag: String
     ) =
-        childFragmentManager.beginTransaction().replace(containerViewId, fragment, tag).commit()
+        childFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
+            replace(containerViewId, fragment, tag)
+        }
 
     fun findFragmentByTag(tag: String) = (activity as? BaseActivity)?.findFragmentByTag(tag)
 
